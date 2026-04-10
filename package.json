@@ -1,14 +1,53 @@
 {
   "name": "shuvi",
   "version": "1.0.0",
-  "description": "The Human-Like System (AGI)",
-  "author": "Taiwan Web Technology Promotion Organization",
+  "author": "Star Inc.",
+  "homepage": "https://starinc.xyz",
   "license": "MIT",
-  "main": "app.mjs",
+  "main": "app.ts",
+  "type": "module",
   "scripts": {
-    "start": "node app.mjs"
+    "dev": "node --watch --experimental-strip-types app.ts",
+    "start": "node --experimental-strip-types app.ts",
+    "lint": "npx lint-staged",
+    "lint:es": "eslint \"app.ts\" \"src/**/*.ts\"",
+    "lint:es:fix": "eslint \"app.ts\" \"src/**/*.ts\" --fix",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.ts": "eslint"
   },
   "dependencies": {
-    "openai": "^4.24.1"
+    "@discordjs/rest": "^2.2.0",
+    "@langchain/core": "^1.0.6",
+    "@langchain/langgraph": "^1.0.2",
+    "@langchain/openai": "^1.1.2",
+    "@modelcontextprotocol/sdk": "^1.22.0",
+    "@types/lowdb": "^1.0.15",
+    "discord-api-types": "^0.37.83",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "lowdb": "^7.0.1",
+    "quickjs-emscripten": "^0.32.0",
+    "tavily": "^1.0.2",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@types/node": "^20.10.6",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.17.0",
+    "eslint-config-google": "^0.14.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "typescript": "5.3.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
