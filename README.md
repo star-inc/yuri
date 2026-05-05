@@ -1,7 +1,3 @@
-# Shuvi
+# Yuri
 
-The human-like system, as known as AGI.
-
-## Model
-
-<https://huggingface.co/supersonictw/machina>
+The human-like system.
