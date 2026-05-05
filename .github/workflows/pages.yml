@@ -1,4 +1,4 @@
-name: Main workflow
+name: GitHub Pages Deployment
 
 on:
   push:
