@@ -1,5 +1,5 @@
 {
-  "name": "shuvi",
+  "name": "yuri",
   "version": "1.0.0",
   "author": "Star Inc.",
   "homepage": "https://starinc.xyz",
@@ -22,7 +22,6 @@
     "@langchain/core": "^1.0.6",
     "@langchain/langgraph": "^1.0.2",
     "@langchain/openai": "^1.1.2",
-    "@modelcontextprotocol/sdk": "^1.22.0",
     "@types/lowdb": "^1.0.15",
     "discord-api-types": "^0.37.83",
     "discord.js": "^14.14.1",
