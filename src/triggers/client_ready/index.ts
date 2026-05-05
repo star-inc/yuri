@@ -68,6 +68,26 @@ const checkGuildCommandRevisions = async (client: Client): Promise<void> => {
     await db.write();
 };
 
+const notifyRestartToOwner = async (client: Client): Promise<void> => {
+    const botOwnerId = process.env.DISCORD_BOT_OWNER_ID as
+        Snowflake | undefined;
+    if (botOwnerId) {
+        try {
+            const botOwner = await client.users.fetch(botOwnerId);
+            await botOwner.send("Yuri has restarted.");
+        } catch (error) {
+            console.warn(
+                `Failed to send restart message to owner (${botOwnerId}):`,
+                error,
+            );
+        }
+    } else {
+        console.warn(
+            "DISCORD_BOT_OWNER_ID is not set. Restart notification skipped.",
+        );
+    }
+};
+
 /**
  * Ready event handler.
  * @param {Client} client The Discord client
@@ -77,9 +97,6 @@ export default async (client: Client): Promise<void> => {
     await Promise.allSettled([
         checkGlobalCommandRevisions(client),
         checkGuildCommandRevisions(client),
+        notifyRestartToOwner(client),
     ]);
-
-    const botOwnerId = process.env.DISCORD_BOT_OWNER_ID as Snowflake;
-    const botOwner = await client.users.fetch(botOwnerId);
-    botOwner.send("Yuri has restarted.");
 };

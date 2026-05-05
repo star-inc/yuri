@@ -58,8 +58,9 @@ export const shellCommand: CommandConfig = {
         const command = interaction.options.getString("command", true);
 
         // Security check: verify the executor's identity
-        const botOwnerId = process.env.DISCORD_BOT_OWNER_ID as Snowflake;
-        if (interaction.user.id !== botOwnerId) {
+        const botOwnerId = process.env.DISCORD_BOT_OWNER_ID as
+            Snowflake | undefined;
+        if (!botOwnerId || interaction.user.id !== botOwnerId) {
             await interaction.reply({
                 content: "You do not have permission to execute this command.",
                 ephemeral: true,
