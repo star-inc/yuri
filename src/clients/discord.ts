@@ -6,6 +6,8 @@ import {
     Partials,
     GatewayIntentBits,
     ApplicationCommandOptionType,
+    ActivityType,
+    PresenceUpdateStatus,
 } from "discord.js";
 import type {
     BaseGuild,
@@ -16,6 +18,7 @@ import type {
 
 const appId = process.env.DISCORD_APP_ID;
 const botToken = process.env.DISCORD_BOT_TOKEN;
+const presenceJson = process.env.DISCORD_PRESENCE;
 
 if (!appId || !botToken) {
     throw new Error(
@@ -41,6 +44,15 @@ export const client = new Client({
         GatewayIntentBits.DirectMessageTyping,
         GatewayIntentBits.MessageContent,
     ],
+    presence: presenceJson ? JSON.parse(presenceJson) : {
+        status: PresenceUpdateStatus.Online,
+        activities: [
+            {
+                name: "Your commands",
+                type: ActivityType.Listening,
+            },
+        ],
+    },
 });
 client.login(botToken);
 
