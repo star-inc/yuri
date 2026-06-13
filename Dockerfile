@@ -25,4 +25,4 @@ RUN npm install --omit=dev --ignore-scripts
 COPY --chown=3000:3000 . .
 
 EXPOSE 3000
-CMD ["node", "--experimental-strip-types", "app.ts"]
+CMD ["node", "app.ts"]
