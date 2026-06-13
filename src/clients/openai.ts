@@ -1,7 +1,5 @@
 // openai is a client for the OpenAI API
 
-import {readFileSync} from "node:fs";
-
 import {
     AIMessage,
     HumanMessage,
@@ -15,11 +13,13 @@ const {
     OPENAI_API_KEY: apiKey,
     OPENAI_CHAT_MODEL: chatModel,
     OPENAI_TEMPERATURE: rawTemperature,
+    SYSTEM_PROMPT: systemPrompt,
 } = process.env;
 
-if (!apiKey || !chatModel) {
+if (!apiKey || !chatModel || !systemPrompt) {
     throw new Error(
-        "Missing OPENAI_API_KEY or OPENAI_CHAT_MODEL environment variables",
+        "Missing OPENAI_API_KEY, OPENAI_CHAT_MODEL, " +
+        "or SYSTEM_PROMPT environment variables",
     );
 }
 
@@ -28,6 +28,7 @@ if (!apiKey || !chatModel) {
 // Use explicitly-typed constants to satisfy the agent's required string types.
 const resolvedApiKey: string = apiKey;
 const resolvedChatModel: string = chatModel;
+const resolvedSystemPrompt: string = systemPrompt;
 
 const parsedTemperature = rawTemperature !== undefined ?
     Number(rawTemperature) :
@@ -36,9 +37,6 @@ const temperature = parsedTemperature !== undefined &&
         Number.isFinite(parsedTemperature) ?
     parsedTemperature :
     undefined;
-
-const avatarSettingsUrl = new URL("../../settings.txt", import.meta.url);
-const avatarSettingsContent = readFileSync(avatarSettingsUrl, "utf-8").trim();
 
 const MAX_HISTORY_MESSAGES = 40;
 const chatHistoryMapper = new Map<string, BaseMessage[]>();
@@ -111,7 +109,7 @@ export async function chatWithAI(
         apiKey: resolvedApiKey,
         baseURL: baseUrl,
         temperature,
-        systemPrompt: avatarSettingsContent,
+        systemPrompt: resolvedSystemPrompt,
     });
 
     const chatHistory = chatHistoryMapper.get(chatId)!;
