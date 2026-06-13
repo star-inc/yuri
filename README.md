@@ -1,3 +1,3 @@
 # Yuri
 
-The human-like system.
+The Agentic Assistant.
