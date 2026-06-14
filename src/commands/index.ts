@@ -4,7 +4,7 @@ import type {
 
 import * as terminal from "./terminal.ts";
 
-export const commandRevision = 1;
+export const commandRevision = 2;
 
 interface CommandIndex {
     global: Record<string, CommandConfig>;
@@ -15,9 +15,7 @@ const commands: CommandIndex = {
     global: {
         ...terminal,
     },
-    guilds: {
-        ...terminal,
-    },
+    guilds: {},
 };
 
 export default commands;
