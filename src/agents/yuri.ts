@@ -248,11 +248,11 @@ async function callTools(
 }
 
 /**
- * Compile a LangGraph-powered ReAct agent with Tavily search capabilities.
+ * Compile a LangGraph-powered ReAct agent with tools capabilities.
  * @param {ReActAgentConfig} config The agent configuration.
  * @return {CompiledStateGraph} The compiled graph ready for invocation.
  */
-export function createReActAgent(config: ReActAgentConfig) {
+export function createYuriAgent(config: ReActAgentConfig) {
     const allTools = [
         ...baseTools,
         ...(config.extraTools ?? []),

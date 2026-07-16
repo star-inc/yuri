@@ -6,7 +6,7 @@ import {
     type BaseMessage,
 } from "@langchain/core/messages";
 
-import {createReActAgent, type AgentState} from "../agents/react.ts";
+import {createYuriAgent, type AgentState} from "../agents/yuri.ts";
 
 const {
     OPENAI_BASE_URL: baseUrl,
@@ -104,7 +104,7 @@ export async function chatWithAI(
         chatHistoryMapper.set(chatId, []);
     }
 
-    const agent = createReActAgent({
+    const agent = createYuriAgent({
         model: resolvedChatModel,
         apiKey: resolvedApiKey,
         baseURL: baseUrl,

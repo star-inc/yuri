@@ -1,0 +1,35 @@
+# Model Context Protocol (MCP) Servers Configuration Template
+# Copy this file to mcp.toml (or the path configured in MCP_CONFIG_PATH) to use.
+
+# Example 1: stdio transport server (e.g. local command execution)
+# [[servers]]
+# name = "everything"
+# enabled = false
+# transport = "stdio"
+# command = "npx -y @modelcontextprotocol/server-everything"
+# [servers.env]
+# SOME_VAR = "value"
+
+# Example 2: sse transport server (e.g. remote SSE HTTP service)
+# [[servers]]
+# name = "remote-sse-service"
+# enabled = false
+# transport = "sse"
+# command = "http://localhost:3001/sse"
+# [servers.headers]
+# Authorization = "Bearer token"
+
+# Example 3: streamablehttp transport server (e.g. remote HTTP service supporting streamable HTTP)
+# [[servers]]
+# name = "remote-http-service"
+# enabled = false
+# transport = "http"
+# command = "http://localhost:3002/mcp"
+# [servers.headers]
+# Authorization = "Bearer token"
+
+[[servers]]
+name = "everything"
+enabled = false
+transport = "stdio"
+command = "npx -y @modelcontextprotocol/server-everything"

@@ -5,23 +5,16 @@ import {
 import {
     currentTimeTool,
 } from "./time.ts";
-import {
-    isEnabled as isTavilyEnabled,
-    tavilySearchTool,
-} from "./tavily.ts";
 
 export const baseTools: StructuredToolInterface[] = [
     currentTimeTool,
 ];
-if (isTavilyEnabled) {
-    baseTools.push(tavilySearchTool);
-}
 
 export const baseToolMap: Record<
     string, StructuredToolInterface
-> = Object.fromEntries(
-    baseTools.map((toolImpl) => [toolImpl.name, toolImpl]),
-);
+> = {
+    [currentTimeTool.name]: currentTimeTool,
+};
 
 // Backward compatibility aliases
 export const tools = baseTools;
